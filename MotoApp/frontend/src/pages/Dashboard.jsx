@@ -39,6 +39,11 @@ const Dashboard = () => {
         navigate(`/edit-bike/${id}`)
     }
 
+
+    const handleLog = (id) => {
+    navigate(`/logs/${id}`)
+}
+
    return(
     <div>
         <h1>Dashboard</h1>
@@ -49,8 +54,13 @@ const Dashboard = () => {
                 <h3>{bike.year} {bike.make} {bike.model_name}</h3>
 
                 <br/>
+                <button onClick={() => handleLog(bike.id)}>log</button>
+
+                <br/>
                 <button onClick={() => removeBike(bike.id)}>remove</button>
                 <button onClick={() => editBike(bike.id)}>edit</button>
+
+                
             </div>
         ))}
 

@@ -16,3 +16,17 @@ class Bike(models.Model):
 
     def __str__(self):
         return f"{self.year} {self.make} {self.model_name}"
+
+
+class MaintenanceLog(models.Model):
+    bike = models.ForeignKey(
+        Bike,
+        on_delete=models.CASCADE
+    )
+
+    date = models.DateField()
+    hours = models.IntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.date} - {self.bike} - {self.hours} hours"
