@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: linear-gradient(160deg, #060912 0%, #0a0c10 50%, #080d1a 100%);
+  background-attachment: fixed;
+  color: #c8ccd8;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Log page wrapper ── */
+.log-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 56px 28px;
+}
+
+.log-page > h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-bottom: 36px;
+  line-height: 1;
+}
+
+/* ── Log card ── */
+.log-card {
+  background: rgba(14, 17, 26, 0.95);
+  border: 1px solid #161b2a;
+  border-radius: 4px;
+  padding: 22px 26px;
+  margin-bottom: 10px;
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.log-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #2a5ce0;
+  border-radius: 4px 0 0 4px;
+}
+
+.log-card:hover {
+  background: rgba(18, 22, 34, 0.98);
+  border-color: #1e2540;
+}
+
+/* Date — most prominent */
+.log-card p:nth-of-type(1) {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+/* Hours */
+.log-card p:nth-of-type(2) {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2a5ce0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+/* Description */
+.log-card p:nth-of-type(3) {
+  font-size: 0.88rem;
+  color: #7a8099;
+  line-height: 1.6;
+  margin-bottom: 2px;
+}
+
+/* ── Log card buttons ── */
+.log-card button {
+  padding: 5px 14px;
+  border-radius: 3px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  margin-right: 6px;
+  margin-top: 14px;
+  transition: all 0.12s ease;
+}
+
+.log-card button:nth-of-type(1) {
+  background: transparent;
+  border: 1px solid #991b1b;
+  color: #dc2626;
+}
+
+.log-card button:nth-of-type(1):hover {
+  background: #991b1b;
+  color: #ffffff;
+}
+
+.log-card button:nth-of-type(2) {
+  background: transparent;
+  border: 1px solid #1e2540;
+  color: #4a5068;
+}
+
+.log-card button:nth-of-type(2):hover {
+  border-color: #4a5068;
+  color: #c8ccd8;
+}
+
+/* ── Bottom page buttons ── */
+.log-page > button {
+  margin-top: 16px;
+  margin-right: 10px;
+  padding: 11px 26px;
+  border-radius: 3px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.log-page > button:nth-of-type(1) {
+  background: #2a5ce0;
+  border: 1px solid #2a5ce0;
+  color: #ffffff;
+}
+
+.log-page > button:nth-of-type(1):hover {
+  background: #1a4cd0;
+  border-color: #1a4cd0;
+}
+
+.log-page > button:nth-of-type(2) {
+  background: transparent;
+  border: 1px solid #1e2540;
+  color: #4a5068;
+}
+
+.log-page > button:nth-of-type(2):hover {
+  border-color: #4a5068;
+  color: #c8ccd8;
+}

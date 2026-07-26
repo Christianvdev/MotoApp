@@ -46,7 +46,8 @@ class LogListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return MaintenanceLog.objects.filter(
-            bike__user=self.request.user
+            bike__user=self.request.user,
+            bike__pk=self.kwargs['pk']
         )
 
     def perform_create(self, serializer):

@@ -3,7 +3,7 @@ import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
 import AddBikePage from './pages/AddBike'
 import {Dashboard, EditBike} from './pages/Dashboard'
-import MaintenanceLog from './pages/MaintenanceLog'
+import {MaintenanceLog, EditLog} from './pages/MaintenanceLog'
 import MaintenanceAdd from './pages/AddMaintenance'
 import { useState } from 'react'
 import './App.css'
@@ -46,6 +46,11 @@ function App() {
         <Route
           path='/add-log/:pk'
           element={<MaintenanceAdd/>}
+        />
+
+        <Route
+          path='/edit-log/:pk'
+          element={<EditLog/>}
         />
 
       </Routes>

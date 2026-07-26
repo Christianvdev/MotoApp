@@ -2,8 +2,6 @@ import api from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-
-
 const LoginPage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -28,20 +26,22 @@ const LoginPage = () => {
     }
     
     return(
-        <div>
+        <div className="auth-page login-page">
             <h1>Login</h1>
             <input
+                className="form-input"
                 placeholder="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
             <input
+                className="form-input"
                 placeholder="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handleSubmit}>Login</button>
+            <button className="btn-primary" onClick={handleSubmit}>Login</button>
         </div>
     )
 }

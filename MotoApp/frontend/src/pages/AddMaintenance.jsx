@@ -33,26 +33,29 @@ const MaintenanceAdd = () => {
     }
 
     return(
-        <div>
+        <div className="form-page add-log">
             <h1>Add Log</h1>
             <input
+                className="form-input"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
             />
             <input
+                className="form-input"
                 type="number"
                 placeholder="Hours"
                 value={hours}
                 onChange={(e) => setHours(e.target.value)}
             />
             <input
+                className="form-input"
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
-            <button onClick={handleSubmit}>Log</button>
-            <button onClick={() => navigate(`/logs/${pk}`)}>Cancel</button>
+            <button className="btn-primary" onClick={handleSubmit}>Log</button>
+            <button className="btn-ghost" onClick={() => navigate(`/logs/${pk}`)}>Cancel</button>
         </div>
     )
 }

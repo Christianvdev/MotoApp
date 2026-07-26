@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import api from "../../api/axios"
+import '../styles/Dashboard.css'
 
 const Dashboard = () => {
     const navigate = useNavigate()
@@ -39,33 +40,30 @@ const Dashboard = () => {
         navigate(`/edit-bike/${id}`)
     }
 
-
     const handleLog = (id) => {
-    navigate(`/logs/${id}`)
-}
+        navigate(`/logs/${id}`)
+    }
 
-   return(
-    <div>
-        <h1>Dashboard</h1>
+    return(
+        <div className="dashboard">
+            <h1>Dashboard</h1>
 
-        <h2>My Bikes</h2>
-        {bikes.map(bike => (
-            <div key={bike.id}>
-                <h3>{bike.year} {bike.make} {bike.model_name}</h3>
+            <h2>My Bikes</h2>
+            {bikes.map(bike => (
+                <div className="bike-card" key={bike.id}>
+                    <h3>{bike.year} {bike.make} {bike.model_name}</h3>
 
-                <br/>
-                <button onClick={() => handleLog(bike.id)}>log</button>
+                    <br/>
+                    <button className="btn-log" onClick={() => handleLog(bike.id)}>log</button>
 
-                <br/>
-                <button onClick={() => removeBike(bike.id)}>remove</button>
-                <button onClick={() => editBike(bike.id)}>edit</button>
+                    <br/>
+                    <button className="btn-danger" onClick={() => removeBike(bike.id)}>remove</button>
+                    <button className="btn-ghost" onClick={() => editBike(bike.id)}>edit</button>
+                </div>
+            ))}
 
-                
-            </div>
-        ))}
-
-            <button onClick={handleLogout}>Log out</button>
-            <button onClick={() => navigate('/add-bike')}>Add Bike</button>
+            <button className="btn-ghost" onClick={handleLogout}>Log out</button>
+            <button className="btn-primary" onClick={() => navigate('/add-bike')}>Add Bike</button>
         </div>
     )
 }
@@ -77,7 +75,6 @@ const EditBike = () => {
     const [error, setError] = useState('')
 
     const {id} = useParams()
-
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -129,39 +126,36 @@ const EditBike = () => {
     }
 
     return(
-    <div>
-        
-        <h1>Add Bike</h1>
+        <div className="form-page edit-bike">
+            <h1>Edit Bike</h1>
 
-        <select value={make} onChange={(e) => { setMake(e.target.value); setModel('') }}>
-            <option value="">Select Make</option>
-            {Object.keys(BIKE_DATA).map(brand => (
-                <option key={brand} value={brand}>{brand}</option>
-            ))}
-        </select>
+            <select className="form-input" value={make} onChange={(e) => { setMake(e.target.value); setModel('') }}>
+                <option value="">Select Make</option>
+                {Object.keys(BIKE_DATA).map(brand => (
+                    <option key={brand} value={brand}>{brand}</option>
+                ))}
+            </select>
 
-        <select value={model} onChange={(e) => setModel(e.target.value)} disabled={!make}>
-            <option value="">Select Model</option>
-            {make && BIKE_DATA[make].map(m => (
-            <option key={m} value={m}>{m}</option>
-        ))}
-        </select>
+            <select className="form-input" value={model} onChange={(e) => setModel(e.target.value)} disabled={!make}>
+                <option value="">Select Model</option>
+                {make && BIKE_DATA[make].map(m => (
+                    <option key={m} value={m}>{m}</option>
+                ))}
+            </select>
 
-        <input
-            placeholder="Year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-        />
+            <input
+                className="form-input"
+                placeholder="Year"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+            />
 
-
-        <br/>
-        <button onClick={handleSubmit}>Apply</button>
-        <br/>
-        <button onClick={() => navigate('/dashboard')}>Cancel</button>
-    </div>
-)
-
-    
+            <br/>
+            <button className="btn-primary" onClick={handleSubmit}>Apply</button>
+            <br/>
+            <button className="btn-ghost" onClick={() => navigate('/dashboard')}>Cancel</button>
+        </div>
+    )
 }
 
 export {Dashboard, EditBike}

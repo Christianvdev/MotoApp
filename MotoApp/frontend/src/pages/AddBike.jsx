@@ -46,18 +46,18 @@ const AddBikePage = () => {
     }
 
     return(
-    <div>
+    <div className="form-page add-bike">
         
         <h1>Add Bike</h1>
 
-        <select value={make} onChange={(e) => { setMake(e.target.value); setModel('') }}>
+        <select className="form-input" value={make} onChange={(e) => { setMake(e.target.value); setModel('') }}>
             <option value="">Select Make</option>
             {Object.keys(BIKE_DATA).map(brand => (
                 <option key={brand} value={brand}>{brand}</option>
             ))}
         </select>
 
-        <select value={model} onChange={(e) => setModel(e.target.value)} disabled={!make}>
+        <select className="form-input" value={model} onChange={(e) => setModel(e.target.value)} disabled={!make}>
             <option value="">Select Model</option>
             {make && BIKE_DATA[make].map(m => (
             <option key={m} value={m}>{m}</option>
@@ -65,12 +65,15 @@ const AddBikePage = () => {
         </select>
 
         <input
+            className="form-input"
             placeholder="Year"
             value={year}
             onChange={(e) => setYear(e.target.value)}
         />
 
-        <button onClick={handleSubmit}>Add Bike</button>
+        <button className="btn-primary" onClick={handleSubmit}>Add Bike</button>
+        <br/>
+        <button className="btn-primary" onClick={() => navigate('/dashboard')}>Go back</button>
     </div>
 )
 
