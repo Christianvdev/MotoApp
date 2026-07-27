@@ -139,3 +139,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "motoapp-backend-trtv.onrender.com",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://motoapp-frontend.netlify.app",
+]
