@@ -107,7 +107,7 @@ const EditBike = () => {
                 model_name: model,
                 year,
             })
-            navigate('/dashboard')
+            navigate('/')
         }
         catch(err){
             console.log(err)
@@ -156,7 +156,7 @@ const EditBike = () => {
             <br/>
             <button className="btn-primary" onClick={handleSubmit}>Apply</button>
             <br/>
-            <button className="btn-ghost" onClick={() => navigate('/dashboard')}>Cancel</button>
+            <button className="btn-ghost" onClick={() => navigate('/')}>Cancel</button>
         </div>
     )
 }

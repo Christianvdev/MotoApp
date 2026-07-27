@@ -24,7 +24,7 @@ const AddBikePage = () => {
                 model_name: model,
                 year,
             })
-            navigate('/dashboard')
+            navigate('/')
         }
         catch(err){
             console.log(err)
@@ -73,7 +73,7 @@ const AddBikePage = () => {
 
         <button className="btn-primary" onClick={handleSubmit}>Add Bike</button>
         <br/>
-        <button className="btn-primary" onClick={() => navigate('/dashboard')}>Go back</button>
+        <button className="btn-primary" onClick={() => navigate('/')}>Go back</button>
     </div>
 )
 

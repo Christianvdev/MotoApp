@@ -52,7 +52,7 @@ const MaintenanceLog = () => {
             ))}
 
             <button className="btn-primary" onClick={() => navigate(`/add-log/${pk}`)}>Add Log</button>
-            <button className="btn-ghost" onClick={() => navigate('/dashboard')}>Back</button>
+            <button className="btn-ghost" onClick={() => navigate('/')}>Back</button>
         </div>
     )
 }
