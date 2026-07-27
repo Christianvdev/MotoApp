@@ -32,6 +32,9 @@ const Dashboard = () => {
     }
 
     const removeBike = async(id) => {
+        if(!window.confirm("Delete this bike and all of it's maintenance logs? This can't be undone.")){
+            return
+        }
         await api.delete(`api/bikes/${id}/`)
         setBikes(bikes.filter(bikes => bikes.id !== id))
     }
