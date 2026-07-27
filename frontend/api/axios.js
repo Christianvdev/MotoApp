@@ -15,28 +15,44 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
-        console.log('Response error:', error.response.status)
+        const originalRequest = error.config
 
-        if (error.response.status === 401) {
+        console.log('Response error:', error.response?.status)
+
+        if (
+            error.response?.status === 401 &&
+            !originalRequest._retry &&
+            !originalRequest.url.includes('/api/token/refresh')
+        ) {
+            originalRequest._retry = true
+
             try {
                 const refresh = localStorage.getItem('refresh_token')
                 console.log('Refresh token exists:', !!refresh)
 
                 const response = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/api/token/refresh`,
+                    `${import.meta.env.VITE_API_URL}/api/token/refresh/`,
                     { refresh }
                 )
 
                 console.log('New token received:', response.data.access)
 
-                localStorage.setItem('access_token', response.data.access)
-                error.config.headers.Authorization = `Bearer ${response.data.access}`
-                return api(error.config)
+                localStorage.setItem(
+                    'access_token',
+                    response.data.access
+                )
 
-            } catch(err) {
+                originalRequest.headers.Authorization =
+                    `Bearer ${response.data.access}`
+
+                return api(originalRequest)
+
+            } catch (err) {
                 console.log('Refresh failed:', err)
+
                 localStorage.removeItem('access_token')
                 localStorage.removeItem('refresh_token')
+
                 window.location.href = '/'
             }
         }
@@ -44,6 +60,5 @@ api.interceptors.response.use(
         return Promise.reject(error)
     }
 )
-
 
 export default api
