@@ -1,6 +1,7 @@
 import api from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import '../styles/auth.css'
 
 const LoginPage = () => {
     const [username, setUsername] = useState('')
@@ -27,7 +28,7 @@ const LoginPage = () => {
     
     return(
         <div className="auth-page login-page">
-            <h1>Login</h1>
+            <h1>Welcome Back, Rider</h1>
             <input
                 className="form-input"
                 placeholder="username"
@@ -42,6 +43,7 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button className="btn-primary" onClick={handleSubmit}>Login</button>
+            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/register')}>Register</button>
         </div>
     )
 }

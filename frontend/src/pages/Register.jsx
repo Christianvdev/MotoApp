@@ -53,6 +53,8 @@ const RegisterPage = () => {
             />
 
             <button className="btn-primary" onClick={handleRegister}>Register</button>
+            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/Login')}>login</button>
+            
         </div>
     )
 }
