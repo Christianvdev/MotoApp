@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Bike, MaintenanceLog
-from .serializers import BikeSerializer, MaintenanceLogSerializer
+from .models import Bike, MaintenanceLog, PartService
+from .serializers import BikeSerializer, MaintenanceLogSerializer, PartServiceSerializer
 from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
@@ -64,3 +64,26 @@ class LogDetailView(generics.RetrieveUpdateDestroyAPIView):
         return MaintenanceLog.objects.filter(
             bike__user=self.request.user
         )
+
+
+#-----PARTS-LIST-----
+
+class PartsListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PartServiceSerializer
+
+    def get_queryset(self):
+        bike_id = self.kwargs['pk']
+        return PartService.objects.filter(bike_id=bike_id, bike__user=self.request.user)
+    
+    def perform_create(self, serializer):
+        bike = Bike.objects.get(pk=self.kwargs['pk'], user=self.request.user)
+        serializer.save(bike=bike)
+
+
+class PartsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PartServiceSerializer
+
+    def get_queryset(self):
+        return PartService.objects.filter(bike__user=self.request.user)

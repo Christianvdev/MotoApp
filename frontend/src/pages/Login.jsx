@@ -17,7 +17,6 @@ const LoginPage = () => {
             })
             localStorage.setItem('access_token', response.data.access)
             localStorage.setItem('refresh_token', response.data.refresh)
-            alert("Logged in!")
             navigate('/')
 
         }

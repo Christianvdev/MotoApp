@@ -22,7 +22,7 @@ api.interceptors.response.use(
         if (
             error.response?.status === 401 &&
             !originalRequest._retry &&
-            !originalRequest.url.includes('/api/token/refresh')
+            !originalRequest.url.includes('api/token/refresh')
         ) {
             originalRequest._retry = true
 
@@ -31,7 +31,7 @@ api.interceptors.response.use(
                 console.log('Refresh token exists:', !!refresh)
 
                 const response = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/api/token/refresh/`,
+                    `${import.meta.env.VITE_API_URL}api/token/refresh/`,
                     { refresh }
                 )
 

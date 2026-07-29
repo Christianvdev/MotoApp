@@ -73,7 +73,7 @@ const AddBikePage = () => {
 
         <button className="btn-primary" onClick={handleSubmit}>Add Bike</button>
         <br/>
-        <button className="btn-primary" onClick={() => navigate('/')}>Go back</button>
+        <button className="btn-ghost" onClick={() => navigate('/')}>Go back</button>
     </div>
 )
 

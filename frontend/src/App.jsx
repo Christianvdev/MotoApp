@@ -5,6 +5,8 @@ import AddBikePage from './pages/AddBike'
 import {Dashboard, EditBike} from './pages/Dashboard'
 import {MaintenanceLog, EditLog} from './pages/MaintenanceLog'
 import MaintenanceAdd from './pages/AddMaintenance'
+import PartAdd from './pages/AddPart'
+import { EditPart } from './pages/MaintenanceLog'
 import { useState } from 'react'
 import './App.css'
 
@@ -53,6 +55,14 @@ function App() {
           element={<EditLog/>}
         />
 
+        <Route
+          path='/part-add/:pk'
+          element={<PartAdd/>}
+        />
+        <Route 
+          path='/part-edit/:pk'
+          element={<EditPart/>}
+        />
       </Routes>
     </BrowserRouter>
   )

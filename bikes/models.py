@@ -30,3 +30,27 @@ class MaintenanceLog(models.Model):
 
     def __str__(self):
         return f"{self.date} - {self.bike} - {self.hours} hours"
+
+class PartService(models.Model):
+    bike = models.ForeignKey(
+        Bike,
+        on_delete=models.CASCADE
+    )
+
+    PART_CHOICES = [
+        ("oil", "Oil"),
+        ("air_filter", "Air Filter"),
+        ("chain", "Chain"),
+        ("sprockets", "Sprockets"),
+        ("tires", "Tires"),
+        ("brake_pads", "Brake Pads"),
+    ]
+
+    part_type = models.CharField(max_length=20, choices=PART_CHOICES)
+
+    date = models.DateField()
+    hours = models.IntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.bike} - {self.get_part_type_display()} - {self.date}"
