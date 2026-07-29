@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:4173",
-    "https://motoapp-frontend.netlify.app",
+    "https://motocrosstracker.netlify.app/",
 ]
 
 REST_FRAMEWORK = {
