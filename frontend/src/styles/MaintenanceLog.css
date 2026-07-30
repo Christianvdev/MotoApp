@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-@media (max-width: 600px) {
-  .log-page { padding: 40px 18px; }
-  .log-page > h1 { font-size: 2rem; }
-  .form-page { margin: 50px auto; padding: 30px 24px; }
+
 body {
   background-color: #05070d;
   background-image:
@@ -16,7 +13,6 @@ body {
   color: #c9cddb;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
- }
 }
 
 .log-page { max-width: 800px; margin: 0 auto; padding: 56px 28px; }
