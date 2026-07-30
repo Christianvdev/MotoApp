@@ -8,7 +8,6 @@ import MaintenanceAdd from './pages/AddMaintenance'
 import PartAdd from './pages/AddPart'
 import { EditPart } from './pages/MaintenanceLog'
 import { useState } from 'react'
-import './App.css'
 
 function App() {
   return (
