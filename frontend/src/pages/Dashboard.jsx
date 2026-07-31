@@ -54,12 +54,18 @@ const Dashboard = () => {
             <h2>My Bikes</h2>
             {bikes.map(bike => (
                 <div className="bike-card" key={bike.id}>
-                    <h3>{bike.year} {bike.make} {bike.model_name}</h3>
+                    <h3 className="bike-name">{bike.year} {bike.make} {bike.model_name}</h3>
 
                     <br/>
+
+                    <h3 className="dash-hours">{bike.current_hours}</h3>
+
+                    <br/>
+
                     <button className="btn-log" onClick={() => handleLog(bike.id)}>log</button>
 
                     <br/>
+
                     <button className="btn-danger" onClick={() => removeBike(bike.id)}>remove</button>
                     <button className="btn-ghost" onClick={() => editBike(bike.id)}>edit</button>
                 </div>

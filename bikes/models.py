@@ -21,7 +21,8 @@ class Bike(models.Model):
 class MaintenanceLog(models.Model):
     bike = models.ForeignKey(
         Bike,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="maintenance_logs"
     )
 
     date = models.DateField()
