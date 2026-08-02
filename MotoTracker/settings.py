@@ -142,4 +142,5 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://motoapp-frontend.netlify.app",
+    'https://your-app-name.onrender.com',
 ]
