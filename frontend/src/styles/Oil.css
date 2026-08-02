@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #05070d;
+  background-image:
+    radial-gradient(ellipse 900px 600px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 64px),
+    linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
+  color: #c9cddb;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Card container ── */
+
+.form-page {
+  max-width: 440px;
+  margin: 90px auto;
+  padding: 40px 36px;
+  background: #0a0d18;
+  border: 1px solid #161b2c;
+  border-radius: 6px;
+  position: relative;
+}
+
+.form-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(47, 94, 240, 0.5), transparent);
+}
+
+/* ── Title + eyebrow label ── */
+
+.form-page h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.form-page h1::before {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #2f5ef0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* ── Inputs ── */
+
+.form-input {
+  width: 100%;
+  display: block;
+  background: #0d1120;
+  border: 1px solid #1c2136;
+  border-radius: 3px;
+  color: #f1f3f9;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  margin-top: 22px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.form-input:focus {
+  border-color: #2f5ef0;
+  background: #0f1428;
+}
+
+.form-input:hover {
+  border-color: #2a3050;
+}
+
+select.form-input {
+  cursor: pointer;
+}
+
+select.form-input option {
+  background: #0d1120;
+}
+
+/* ── Result readout ── */
+
+.oil-result {
+  margin-top: 28px;
+  padding: 20px 22px;
+  background: rgba(47, 94, 240, 0.06);
+  border: 1px solid #1c2f6b;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7290;
+  text-align: center;
+}
+
+.oil-result span {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: #8fa8ff;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 16px rgba(47, 94, 240, 0.5);
+  margin: 6px 0 2px;
+}
+
+/* ── Back button ── */
+
+.form-page .btn-ghost {
+  margin-top: 22px;
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 3px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: transparent;
+  border: 1px solid #1c2136;
+  color: #6b7290;
+}
+
+.form-page .btn-ghost:hover {
+  border-color: #3a4266;
+  color: #c9cddb;
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 600px) {
+  .form-page {
+    margin: 50px auto;
+    padding: 30px 24px;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 500px 350px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
+      radial-gradient(ellipse 400px 300px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 64px),
+      linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
+  }
+}

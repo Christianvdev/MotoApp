@@ -53,7 +53,12 @@ const RegisterPage = () => {
             />
 
             <button className="btn-primary" onClick={handleRegister}>Register</button>
-            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/Login')}>login</button>
+            <br/>
+            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/Login')}>Already have an account?</button>
+
+            <p className="auth-tagline">
+                    Track your bikes. Log every hour.
+            </p>
             
         </div>
     )

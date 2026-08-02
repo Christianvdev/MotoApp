@@ -142,6 +142,7 @@ body {
 .btn-primary,
 .btn-ghost,
 .btn-danger,
+.btn-oil,
 .btn-log {
   display: inline-block;
   padding: 10px 22px;
@@ -336,4 +337,32 @@ select.form-input option {
 }
 .dash-desc {
   font-size: 0.88rem; color: #8b91a8; line-height: 1.6; max-width: 85%;
+}
+
+.btn-oil {
+  background: #36405e;
+  border-color: #3f4042;
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+  margin-top: 2rem;
+}
+
+.btn-oil:hover {
+  border-color: #0c0c0c;
+}
+.bike-card .bike-hours {
+  width: fit-content;
+  margin: 0 auto 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #6088ff;
+  border: #2f5ff0 4px inset;
+  background: rgba(55, 99, 230, 0.1);
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.bike-hours::after { content: " HRS";
+  opacity: 0.6;
+  font-size: 1.25rem; 
 }

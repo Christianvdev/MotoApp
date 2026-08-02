@@ -64,7 +64,7 @@ const MaintenanceLog = () => {
                 <div className="log-card" key={log.id}>
                     <p className="log-date">{log.date}</p>
                     <p className="log-hours">{log.hours}</p>
-                    <p className="log-desc">{log.description}</p>
+                    <p className="log-desc desc-text">{log.description}</p>
 
                     <button className="btn-danger" onClick={() => removeLog(log.id)}>remove</button>
                     <button className="btn-ghost" onClick={() => navigate(`/edit-log/${log.id}`)}>edit</button>
@@ -78,7 +78,7 @@ const MaintenanceLog = () => {
                     <h1 className="log-date">{part.part_type_display}</h1>
                     <p className="log-date">{part.date}</p>
                     <p className="log-hours">{part.hours}</p>
-                    <p className="log-desc">{part.description}</p>
+                    <p className="log-desc desc-text">{part.description}</p>
 
                     <button className="btn-danger" onClick={() => removePart(part.id)}>remove</button>
                     <button className="btn-ghost" onClick={() => navigate(`/part-edit/${part.id}`)}>edit</button>
@@ -88,7 +88,8 @@ const MaintenanceLog = () => {
 
             <br/>
             
-            <button className="btn-ghost" onClick={() => navigate('/')}>Back</button>
+            <button className="btn-ghost" onClick={() => navigate('/dashboard')}>Back</button>
+
         </div>
     )
 }

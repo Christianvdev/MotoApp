@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
 import AddBikePage from './pages/AddBike'
@@ -7,6 +7,7 @@ import {MaintenanceLog, EditLog} from './pages/MaintenanceLog'
 import MaintenanceAdd from './pages/AddMaintenance'
 import PartAdd from './pages/AddPart'
 import { EditPart } from './pages/MaintenanceLog'
+import OilCalc from './pages/OilMix'
 import { useState } from 'react'
 
 function App() {
@@ -61,6 +62,15 @@ function App() {
         <Route 
           path='/part-edit/:pk'
           element={<EditPart/>}
+        />
+        <Route 
+          path='/mix-calc'
+          element={<OilCalc/>}
+        />
+
+        <Route 
+          path='*'
+          element={<Navigate to="/" replace/>}
         />
       </Routes>
     </BrowserRouter>

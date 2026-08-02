@@ -8,14 +8,19 @@ html, body {
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 @media (max-width: 600px) {
-  .auth-page { margin: 60px auto; padding: 32px 26px; }
-
+  .auth-page { margin: 60px auto; 
+    padding: 32px 26px;
+    width: 90%; 
+  
+  }
+  
   body {
     background-image:
       radial-gradient(ellipse 500px 350px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
       radial-gradient(ellipse 400px 300px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
       repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 64px),
       linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
+
   }
 }
 
@@ -53,7 +58,7 @@ html, body {
   color: #2f5ef0;
   margin-bottom: 10px;
   text-transform: uppercase;
-  animation: ticker-scroll 9s linear infinite;
+  animation: ticker-scroll 10s linear infinite;
 }
 
 @keyframes ticker-scroll {
@@ -66,10 +71,10 @@ html, body {
 }
 
 .login-page h1::before {
-  content: "RIDER ACCESS   •   RIDER ACCESS   •   RIDER ACCESS   •   RIDER ACCESS   •   ";
+  content: "RIDER ACCESS • RIDER ACCESS • RIDER ACCESS • RIDER ACCESS • RIDER ACCESS • RIDER ACCESS • RIDER ACCESS • RIDER ACCESS •";
 }
 .register-page h1::before {
-  content: "NEW RIDER   •   NEW RIDER   •   NEW RIDER   •   NEW RIDER   •   ";
+  content: "NEW RIDER • NEW RIDER • NEW RIDER • NEW RIDER • NEW RIDER • NEW RIDER • NEW RIDER • NEW RIDER •";
 }
 
 .auth-error {
@@ -109,4 +114,12 @@ html, body {
 
 @media (max-width: 600px) {
   .auth-page { margin: 60px auto; padding: 32px 26px; }
+}
+
+.auth-tagline{
+  font-size: 1rem;
+  color: #474c63;
+  margin-top: 24px;
+  font-style: italic;
+  font-family: 'Barlow Condensed', sans-serif;
 }

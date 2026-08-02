@@ -58,7 +58,7 @@ const Dashboard = () => {
 
                     <br/>
 
-                    <h3 className="dash-hours">{bike.current_hours}</h3>
+                    <h3 className="bike-hours">{bike.current_hours}</h3>
 
                     <br/>
 
@@ -73,6 +73,9 @@ const Dashboard = () => {
 
             <button className="btn-ghost" onClick={handleLogout}>Log out</button>
             <button className="btn-primary" onClick={() => navigate('/add-bike')}>Add Bike</button>
+
+            <br/>
+            <button className="btn-oil" onClick={() => navigate('/mix-calc')}>oil mixture</button>
         </div>
     )
 }
@@ -158,7 +161,6 @@ const EditBike = () => {
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
             />
-
             <br/>
             <button className="btn-primary" onClick={handleSubmit}>Apply</button>
             <br/>

@@ -42,7 +42,8 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button className="btn-primary" onClick={handleSubmit}>Login</button>
-            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/register')}>Register</button>
+            <br/>
+            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/register')}>Register here</button>
         </div>
     )
 }
