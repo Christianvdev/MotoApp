@@ -18,7 +18,6 @@ const LoginPage = () => {
             localStorage.setItem('access_token', response.data.access)
             localStorage.setItem('refresh_token', response.data.refresh)
             navigate('/')
-
         }
         catch(err){
             setError('Invalid credentials')
@@ -26,24 +25,34 @@ const LoginPage = () => {
     }
     
     return(
-        <div className="auth-page login-page">
-            <h1>Welcome Back, Rider</h1>
-            <input
-                className="form-input"
-                placeholder="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                className="form-input"
-                placeholder="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button className="btn-primary" onClick={handleSubmit}>Login</button>
-            <br/>
-            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/register')}>Register here</button>
+        <div>
+            <div className="auth-page login-page">
+                <h1>MotoTracker</h1>
+                <p className="auth-tagline">
+                    Track your bikes. Log every service. Never guess your mix ratio again.
+                </p>
+
+                <input
+                    className="form-input"
+                    placeholder="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                    className="form-input"
+                    placeholder="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {error && <p className="auth-error">{error}</p>}
+
+                <button className="btn-primary" onClick={handleSubmit}>Login</button>
+
+                <p className="auth-switch">
+                    New here? <span onClick={() => navigate('/register')}>Create an account</span>
+                </p>
+            </div>
         </div>
     )
 }

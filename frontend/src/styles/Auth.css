@@ -7,31 +7,26 @@ html, body {
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-@media (max-width: 600px) {
-  .auth-page { margin: 60px auto; 
-    padding: 32px 26px;
-    width: 90%; 
-  
-  }
-  
-  body {
-    background-image:
-      radial-gradient(ellipse 500px 350px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
-      radial-gradient(ellipse 400px 300px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 64px),
-      linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
-
-  }
+body {
+  background-color: #05070d;
+  background-image:
+    radial-gradient(ellipse 900px 600px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 64px),
+    linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
+  color: #c9cddb;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
 }
 
 .auth-page {
+  position: relative;
   max-width: 440px;
   margin: 110px auto;
   padding: 44px 40px;
   background: #0a0d18;
   border: 1px solid #161b2c;
   border-radius: 6px;
-  position: relative;
 }
 .auth-page::before {
   content: '';
@@ -87,10 +82,27 @@ html, body {
   margin-top: 16px;
 }
 
+.auth-tagline {
+  font-size: 1rem;
+  color: #474c63;
+  margin-top: 24px;
+  font-style: italic;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
 .form-input {
-  width: 100%; display: block; background: #0d1120; border: 1px solid #1c2136;
-  border-radius: 3px; color: #f1f3f9; padding: 12px 16px; font-size: 0.9rem;
-  font-family: 'Inter', sans-serif; outline: none; margin-bottom: 12px; margin-top: 22px;
+  width: 100%;
+  display: block;
+  background: #0d1120;
+  border: 1px solid #1c2136;
+  border-radius: 3px;
+  color: #f1f3f9;
+  padding: 12px 16px;
+  font-size: 16px; /* prevents iOS auto-zoom on focus */
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  margin-bottom: 12px;
+  margin-top: 22px;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 .form-input:focus { border-color: #2f5ef0; background: #0f1428; }
@@ -112,14 +124,43 @@ html, body {
 
 .auth-page .btn-primary, .auth-page .btn-ghost { margin-top: 18px; }
 
-@media (max-width: 600px) {
-  .auth-page { margin: 60px auto; padding: 32px 26px; }
+.auth-switch {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #6b7290;
+  text-align: center;
 }
+.auth-switch span {
+  color: #6f93ff;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.auth-switch span:hover { color: #8fa8ff; }
 
-.auth-tagline{
-  font-size: 1rem;
-  color: #474c63;
-  margin-top: 24px;
-  font-style: italic;
-  font-family: 'Barlow Condensed', sans-serif;
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .auth-page {
+    margin: 40px auto 0;
+    padding: 28px 20px;
+    width: 90%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 15px 22px;
+    font-size: 0.85rem;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 500px 350px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
+      radial-gradient(ellipse 400px 300px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 64px),
+      linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
+  }
 }

@@ -22,46 +22,31 @@ const RegisterPage = () => {
             navigate('/login')
         }
         catch(err){
-            
+            setError('Registration failed. Try a different username.')
         }
     }
 
 
     return(
-        <div className="auth-page register-page">
-            {error && <p className="auth-error">{error}</p>}
-            <h1>Register</h1>
-            <input
-                className="form-input"
-                placeholder="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
+    <div className="auth-page register-page">
+        <h1>Create Your Account</h1>
+        <p className="auth-tagline">
+            Join riders tracking their bikes, maintenance, and mix ratios in one place.
+        </p>
 
-            <input
-                className="form-input"
-                placeholder="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                className="form-input"
-                type="password"
-                placeholder="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+        {error && <p className="auth-error">{error}</p>}
 
-            <button className="btn-primary" onClick={handleRegister}>Register</button>
-            <br/>
-            <button  className="btn-ghost" style={{ marginLeft: '12px' }} onClick={() => navigate('/Login')}>Already have an account?</button>
+        <input className="form-input" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input className="form-input" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className="form-input" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-            <p className="auth-tagline">
-                    Track your bikes. Log every hour.
-            </p>
-            
-        </div>
-    )
+        <button className="btn-primary" onClick={handleRegister}>Register</button>
+
+        <p className="auth-switch">
+            Already have an account? <span onClick={() => navigate('/login')}>Login</span>
+        </p>
+    </div>
+)
 }
 
 
