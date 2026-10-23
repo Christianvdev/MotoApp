@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from .models import Bike, MaintenanceLog, PartService
 from .serializers import BikeSerializer, MaintenanceLogSerializer, PartServiceSerializer
@@ -51,7 +52,7 @@ class LogListCreateView(generics.ListCreateAPIView):
         )
 
     def perform_create(self, serializer):
-        bike = Bike.objects.get(pk=self.kwargs['pk'])
+        bike = get_object_or_404(Bike, pk=self.kwargs['pk'], user=self.request.user)
         serializer.save(bike=bike)
 
 
@@ -77,7 +78,7 @@ class PartsListCreateView(generics.ListCreateAPIView):
         return PartService.objects.filter(bike_id=bike_id, bike__user=self.request.user)
     
     def perform_create(self, serializer):
-        bike = Bike.objects.get(pk=self.kwargs['pk'], user=self.request.user)
+        bike = get_object_or_404(Bike, pk=self.kwargs['pk'], user=self.request.user)
         serializer.save(bike=bike)
 
 
