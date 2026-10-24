@@ -1,83 +1,96 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import api from "../../api/axios"
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import api from '../../api/axios'
+import { Icon } from '../components/MotoShell'
 import '../styles/Dashboard.css'
 
 const Dashboard = () => {
-    const navigate = useNavigate()
-    const [bikes, setBikes] = useState([])
+  const navigate = useNavigate()
+  const [bikes, setBikes] = useState([])
+  const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const token = localStorage.getItem('access_token')
-        if(!token){
-            navigate('/login')
-        }
-
-        const fetchBikes = async() => {
-            try{
-                const res = await api.get('api/bikes/')
-                setBikes(res.data)
-            }
-            catch(err){
-                console.log(err)
-            }
-        }
-        fetchBikes()
-    }, [])
-
-    const handleLogout = () => {
-        localStorage.removeItem('access_token')
-        localStorage.removeItem('refresh_token')
-        navigate('/login')
+  useEffect(() => {
+    if (!localStorage.getItem('access_token')) {
+      navigate('/login')
+      return
     }
-
-    const removeBike = async(id) => {
-        if(!window.confirm("Delete this bike and all of it's maintenance logs? This can't be undone.")){
-            return
-        }
-        await api.delete(`api/bikes/${id}/`)
-        setBikes(bikes.filter(bikes => bikes.id !== id))
+    async function fetchBikes() {
+      try {
+        const response = await api.get('api/bikes/')
+        setBikes(response.data.results || response.data)
+      } catch (error) {
+        console.error('Unable to load garage:', error)
+      } finally {
+        setLoading(false)
+      }
     }
+    fetchBikes()
+  }, [navigate])
 
-    const editBike = (id) => {
-        navigate(`/edit-bike/${id}`)
+  async function removeBike(id) {
+    if (!window.confirm("Delete this bike and all of its maintenance logs? This can't be undone.")) return
+    try {
+      await api.delete(`api/bikes/${id}/`)
+      setBikes(current => current.filter(bike => bike.id !== id))
+    } catch (error) {
+      console.error('Unable to remove bike:', error)
     }
+  }
 
-    const handleLog = (id) => {
-        navigate(`/logs/${id}`)
-    }
+  const totalHours = bikes.reduce((sum, bike) => sum + (Number(bike.current_hours) || 0), 0)
 
-    return(
-        <div className="dashboard">
-            <h1>Dashboard</h1>
-
-            <h2>My Bikes</h2>
-            {bikes.map(bike => (
-                <div className="bike-card" key={bike.id}>
-                    <h3 className="bike-name">{bike.year} {bike.make} {bike.model_name}</h3>
-
-                    <br/>
-
-                    <h3 className="bike-hours">{bike.current_hours}</h3>
-
-                    <br/>
-
-                    <button className="btn-log" onClick={() => handleLog(bike.id)}>log</button>
-
-                    <br/>
-
-                    <button className="btn-danger" onClick={() => removeBike(bike.id)}>remove</button>
-                    <button className="btn-ghost" onClick={() => editBike(bike.id)}>edit</button>
-                </div>
-            ))}
-
-            <button className="btn-ghost" onClick={handleLogout}>Log out</button>
-            <button className="btn-primary" onClick={() => navigate('/add-bike')}>Add Bike</button>
-
-            <br/>
-            <button className="btn-oil" onClick={() => navigate('/mix-calc')}>oil mixture</button>
+  return (
+    <div className="dashboard moto-garage">
+      <section className="moto-garage-hero">
+        <div className="moto-garage-hero-content">
+          <p className="moto-eyebrow">THE RIDER'S WORKSHOP</p>
+          <h1 className="moto-heading">YOUR GARAGE<span className="moto-hero-period">.</span></h1>
+          <p className="moto-description">Every machine has a story. Keep your hours, service history and parts organized between rides.</p>
+          <div className="moto-hero-actions">
+            <button className="btn-primary" onClick={() => navigate('/add-bike')}><Icon name="plus" size={17}/> ADD A BIKE</button>
+            <button className="btn-ghost" onClick={() => navigate('/mix-calc')}><Icon name="drop" size={17}/> MIX CALCULATOR</button>
+          </div>
         </div>
-    )
+        <div className="moto-hero-art" aria-hidden="true">
+          <span className="moto-hero-art-number">MX</span>
+          <span className="moto-hero-art-line"/>
+          <Icon name="bike" size={102}/>
+          <span className="moto-hero-art-caption">RIDE / SERVICE / REPEAT</span>
+        </div>
+      </section>
+
+      <section className="moto-garage-summary" aria-label="Garage overview">
+        <div><span>BIKES IN GARAGE</span><strong>{loading ? '—' : String(bikes.length).padStart(2, '0')}</strong></div>
+        <div><span>COMBINED ENGINE HOURS</span><strong>{loading ? '—' : totalHours.toLocaleString(undefined, { maximumFractionDigits: 1 })}<small> HRS</small></strong></div>
+        <div className="moto-summary-link"><span>QUICK TOOL</span><button onClick={() => navigate('/mix-calc')}>PREMIX CALCULATOR <Icon name="arrow" size={18}/></button></div>
+      </section>
+
+      <div className="moto-section-heading"><div><p className="moto-eyebrow">MACHINES / 01</p><h2>MY BIKES</h2></div><span>{bikes.length} {bikes.length === 1 ? 'MACHINE' : 'MACHINES'} REGISTERED</span></div>
+
+      {loading ? <div className="moto-garage-empty">Loading your garage...</div> : bikes.length === 0 ? (
+        <div className="moto-garage-empty">
+          <span className="moto-empty-icon"><Icon name="bike" size={39}/></span>
+          <h3>YOUR GARAGE IS WAITING.</h3>
+          <p>Add your first dirt bike to start keeping track of its hours and maintenance.</p>
+          <button className="btn-primary" onClick={() => navigate('/add-bike')}>ADD YOUR FIRST BIKE <Icon name="arrow" size={17}/></button>
+        </div>
+      ) : (
+        <div className="moto-bike-grid">
+          {bikes.map((bike, index) => (
+            <article className="bike-card" key={bike.id}>
+              <div className="moto-bike-topline"><span>GARAGE / {String(index + 1).padStart(2, '0')}</span><span className="moto-bike-active">● ACTIVE MACHINE</span></div>
+              <div className="moto-bike-visual" aria-hidden="true"><span>{bike.make}</span><Icon name="bike" size={82}/></div>
+              <div className="moto-bike-info"><span className="moto-bike-year">{bike.year} / {bike.make}</span><h3 className="bike-name">{bike.model_name}</h3></div>
+              <div className="moto-bike-meter"><span>ENGINE TIME</span><strong className="bike-hours">{bike.current_hours}<small> HRS</small></strong></div>
+              <button className="btn-log moto-bike-main-action" onClick={() => navigate(`/logs/${bike.id}`)}>SERVICE HISTORY <Icon name="arrow" size={17}/></button>
+              <div className="moto-bike-actions"><button className="btn-ghost" onClick={() => navigate(`/edit-bike/${bike.id}`)}>EDIT BIKE</button><button className="btn-danger" onClick={() => removeBike(bike.id)}>REMOVE</button></div>
+            </article>
+          ))}
+          <button className="moto-add-bike-tile" onClick={() => navigate('/add-bike')}><span><Icon name="plus" size={25}/></span><strong>ADD ANOTHER BIKE</strong><small>Make room for the next machine</small></button>
+        </div>
+      )}
+    </div>
+  )
 }
 
 const EditBike = () => {
