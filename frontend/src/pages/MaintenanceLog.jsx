@@ -1,97 +1,99 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import api from "../../api/axios"
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import api from '../../api/axios'
+import { Icon } from '../components/MotoShell'
 import '../styles/MaintenanceLog.css'
 
 const MaintenanceLog = () => {
-    const navigate = useNavigate()
-    const [logs, setLogs] = useState([])
+  const navigate = useNavigate()
+  const [logs, setLogs] = useState([])
+  const [parts, setParts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { pk } = useParams()
 
-    const [parts, setParts] = useState([])
-    const { pk } = useParams()
-
-    useEffect(() => {
-        const token = localStorage.getItem('access_token')
-        if(!token){
-            navigate('/login')
-            return
-        }
-
-        const fetchLogs = async() => {
-            try{
-                const res = await api.get(`api/bikes/log/${pk}/`)
-                setLogs(res.data)
-            }
-            catch(err){
-                console.log(err)
-            }
-        }
-
-        const fetchParts = async() => {
-            const res = await api.get(`api/bikes/parts/${pk}/`)
-            setParts(res.data)
-
-        }
-
-        fetchLogs()
-        fetchParts()
-    }, [pk])
-
-    const removeLog = async(id) => {
-        try{
-            await api.delete(`api/bikes/log/detail/${id}/`)
-            setLogs(logs.filter(logs => logs.id !== id))
-        }
-        catch(err){
-            console.log(err)
-        }
+  useEffect(() => {
+    if (!localStorage.getItem('access_token')) {
+      navigate('/login')
+      return
     }
 
-    const removePart = async(id) => {
-        try{
-            await api.delete(`api/bikes/parts/detail/${id}/`)
-            setParts(parts.filter(parts => parts.id !== id))
-        }
-        catch(err){
-            console.log(err)
-        }
+    async function loadRecords() {
+      try {
+        const [logResponse, partResponse] = await Promise.all([
+          api.get(`api/bikes/log/${pk}/`),
+          api.get(`api/bikes/parts/${pk}/`)
+        ])
+        setLogs(logResponse.data.results || logResponse.data)
+        setParts(partResponse.data.results || partResponse.data)
+      } catch (error) {
+        console.error('Unable to load service records:', error)
+      } finally {
+        setLoading(false)
+      }
     }
+    loadRecords()
+  }, [pk, navigate])
 
-    return(
-        <div className="log-page">
-            <h1>Bike Logs</h1>
-            {logs.map(log => (
-                <div className="log-card" key={log.id}>
-                    <p className="log-date">{log.date}</p>
-                    <p className="log-hours">{log.hours}</p>
-                    <p className="log-desc desc-text">{log.description}</p>
+  async function removeLog(id) {
+    if (!window.confirm('Remove this service record?')) return
+    try {
+      await api.delete(`api/bikes/log/detail/${id}/`)
+      setLogs(current => current.filter(log => log.id !== id))
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
-                    <button className="btn-danger" onClick={() => removeLog(log.id)}>remove</button>
-                    <button className="btn-ghost" onClick={() => navigate(`/edit-log/${log.id}`)}>edit</button>
-                </div>
-            ))}
-            <button className="btn-primary" onClick={() => navigate(`/add-log/${pk}`)}>Add Log</button>
+  async function removePart(id) {
+    if (!window.confirm('Remove this part record?')) return
+    try {
+      await api.delete(`api/bikes/parts/detail/${id}/`)
+      setParts(current => current.filter(part => part.id !== id))
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
-            <h1> Part Logs</h1>
-            {parts.map(part => (
-                <div className="log-card" key={part.id}>
-                    <h1 className="log-date">{part.part_type_display}</h1>
-                    <p className="log-date">{part.date}</p>
-                    <p className="log-hours">{part.hours}</p>
-                    <p className="log-desc desc-text">{part.description}</p>
+  return (
+    <div className="log-page">
+      <div className="moto-log-heading">
+        <div><p className="moto-eyebrow">WORKSHOP / BIKE {pk}</p><h1 className="moto-heading">SERVICE HISTORY<span className="moto-hero-period">.</span></h1><p className="moto-description">Keep every repair, replacement and service in one place.</p></div>
+        <button className="btn-ghost" onClick={() => navigate('/')}><Icon name="back" size={17}/> BACK TO GARAGE</button>
+      </div>
 
-                    <button className="btn-danger" onClick={() => removePart(part.id)}>remove</button>
-                    <button className="btn-ghost" onClick={() => navigate(`/part-edit/${part.id}`)}>edit</button>
-                </div>
-            ))}
-            <button className="btn-primary" onClick={() => navigate(`/part-add/${pk}`)}>Add Part</button>
+      <div className="moto-log-summary">
+        <div><span>MAINTENANCE ENTRIES</span><strong>{loading ? '—' : logs.length}</strong></div>
+        <div><span>PART RECORDS</span><strong>{loading ? '—' : parts.length}</strong></div>
+        <div><span>YOUR MACHINE</span><strong className="moto-log-summary-label">SERVICE LOG</strong></div>
+      </div>
 
-            <br/>
-            
-            <button className="btn-ghost" onClick={() => navigate('/dashboard')}>Back</button>
+      <section className="moto-record-section">
+        <div className="moto-record-heading"><div><p className="moto-eyebrow">MAINTENANCE / 01</p><h2>WORKSHOP LOG</h2></div><button className="btn-primary" onClick={() => navigate(`/add-log/${pk}`)}><Icon name="plus" size={17}/> ADD SERVICE</button></div>
+        {logs.length === 0 ? <div className="moto-record-empty">{loading ? 'Loading records...' : 'No service entries yet. Add a log after your next maintenance session.'}</div> : (
+          <div className="moto-record-list">
+            {logs.map(log => <article className="log-card" key={log.id}>
+              <div className="moto-record-marker"><Icon name="wrench" size={21}/></div>
+              <div className="moto-record-details"><span className="moto-record-type">SERVICE ENTRY</span><h3 className="log-date">{log.date}</h3><p className="log-desc desc-text">{log.description || 'No description added'}</p></div>
+              <div className="moto-record-end"><span className="log-hours">{log.hours}</span><div className="moto-record-actions"><button className="btn-ghost" onClick={() => navigate(`/edit-log/${log.id}`)}>EDIT</button><button className="btn-danger" onClick={() => removeLog(log.id)}>REMOVE</button></div></div>
+            </article>)}
+          </div>
+        )}
+      </section>
 
-        </div>
-    )
+      <section className="moto-record-section">
+        <div className="moto-record-heading"><div><p className="moto-eyebrow">PARTS / 02</p><h2>PARTS HISTORY</h2></div><button className="btn-primary" onClick={() => navigate(`/part-add/${pk}`)}><Icon name="plus" size={17}/> ADD PART</button></div>
+        {parts.length === 0 ? <div className="moto-record-empty">{loading ? 'Loading parts...' : 'No parts recorded yet. Track replacements to keep your bike dialed in.'}</div> : (
+          <div className="moto-record-list">
+            {parts.map(part => <article className="log-card" key={part.id}>
+              <div className="moto-record-marker"><Icon name="wrench" size={21}/></div>
+              <div className="moto-record-details"><span className="moto-record-type">PART REPLACEMENT</span><h3 className="log-date">{part.part_type_display || part.part_type}</h3><p className="moto-record-subdate">{part.date}</p><p className="log-desc desc-text">{part.description || 'No description added'}</p></div>
+              <div className="moto-record-end"><span className="log-hours">{part.hours}</span><div className="moto-record-actions"><button className="btn-ghost" onClick={() => navigate(`/part-edit/${part.id}`)}>EDIT</button><button className="btn-danger" onClick={() => removePart(part.id)}>REMOVE</button></div></div>
+            </article>)}
+          </div>
+        )}
+      </section>
+    </div>
+  )
 }
 
 const EditLog = () => {
