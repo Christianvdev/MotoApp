@@ -1,0 +1,34 @@
+/* MotoTracker's navigation is intentionally more like a race paddock than a business dashboard. */
+.moto-shell{min-height:100vh;background:var(--moto-bg);color:var(--moto-text)}
+.moto-topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;border-bottom:1px solid var(--moto-line);background:#0a0e18}
+.moto-logo{display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;color:#fff;text-align:left}
+.moto-logo-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid #3053b5;border-radius:10px;background:#10204a;color:#86a9ff}
+.moto-logo-type{display:block;font-family:'Barlow Condensed',Impact,sans-serif;font-size:25px;font-weight:800;letter-spacing:1.1px;line-height:.9}
+.moto-logo-type>span,.moto-blue{color:var(--moto-blue)}.moto-logo-type b{color:#fff}
+.moto-logo-type small{display:block;margin-top:7px;font-family:Inter,system-ui,sans-serif;font-size:9px;font-weight:650;letter-spacing:2.3px;color:var(--moto-dim)}
+.moto-topbar-end{display:flex;align-items:center;gap:21px;font-size:11px;font-weight:650;letter-spacing:.8px;text-transform:uppercase;color:var(--moto-muted)}
+.moto-live{display:flex;align-items:center;gap:8px;color:#8da5dc}.moto-live-dot{width:7px;height:7px;border-radius:50%;background:#6b9dff;box-shadow:0 0 12px #2f5ef0}
+.moto-topbar-divider{height:22px;width:1px;background:var(--moto-line)}
+.moto-top-logout{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--moto-line);border-radius:9px;background:var(--moto-panel);color:var(--moto-muted)}
+.moto-top-logout:hover{color:white;border-color:#5278f3}
+.moto-body{display:flex;min-height:calc(100vh - 76px)}
+.moto-rail{display:flex;flex-direction:column;align-items:center;gap:11px;flex:0 0 94px;padding:32px 8px 18px;border-right:1px solid var(--moto-line);background:#0a0e18}
+.moto-rail-label{margin-bottom:12px;color:#5e6b8e;font-size:9px;font-weight:800;letter-spacing:2px}
+.moto-rail-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:74px;min-height:72px;padding:9px 3px;border:1px solid transparent;border-radius:11px;background:none;color:#8d98b2;font-size:10px;font-weight:650;transition:background .2s,color .2s,border-color .2s}
+.moto-rail-item:hover{background:#111c33;color:#fff}.moto-rail-item.active{background:#122452;color:#b4c9ff;border-color:#2b4685}
+.moto-rail-spacer{flex:1}.moto-rail-exit{margin-top:22px}
+.moto-content{display:flex;flex-direction:column;flex:1;min-width:0;max-width:1600px;margin:0 auto;padding:43px clamp(20px,4.5vw,76px) 28px}
+.moto-footer{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:70px;color:#66728e;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.6px}
+.moto-mobile-nav{display:none}
+.moto-eyebrow{display:flex;align-items:center;gap:9px;color:var(--moto-blue);font-size:11px;font-weight:750;letter-spacing:2.3px;text-transform:uppercase}
+.moto-eyebrow::before{content:'';width:15px;height:3px;background:var(--moto-blue);transform:skew(-25deg)}
+.moto-heading{font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(43px,5vw,72px);font-weight:800;line-height:.94;letter-spacing:.5px;text-transform:uppercase;color:#fff}
+.moto-description{color:var(--moto-muted);font-size:13px;line-height:1.7}
+@media(max-width:760px){
+.moto-topbar{height:65px;padding:0 18px}.moto-logo-mark{width:38px;height:38px}.moto-logo-type{font-size:22px}.moto-live,.moto-topbar-divider,.moto-topbar-location,.moto-top-logout{display:none}
+.moto-body{min-height:calc(100vh - 65px)}.moto-rail{display:none}
+.moto-content{padding:28px 18px 112px}.moto-heading{font-size:47px}
+.moto-mobile-nav{position:fixed;z-index:40;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-around;min-height:74px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));border-top:1px solid #283658;background:rgba(9,14,25,.97);backdrop-filter:blur(15px)}
+.moto-mobile-nav button{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:65px;padding:5px;border:0;background:none;color:#8896b5;font-size:10px;font-weight:600}
+.moto-mobile-nav button.active{color:#83a6ff}.moto-footer{padding-top:44px;font-size:9px}
+}
