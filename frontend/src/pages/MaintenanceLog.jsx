@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import api from '../../api/axios'
 import { Icon } from '../components/MotoShell'
 import '../styles/MaintenanceLog.css'
@@ -74,7 +74,7 @@ const MaintenanceLog = () => {
             {logs.map(log => <article className="log-card" key={log.id}>
               <div className="moto-record-marker"><Icon name="wrench" size={21}/></div>
               <div className="moto-record-details"><span className="moto-record-type">SERVICE ENTRY</span><h3 className="log-date">{log.date}</h3><p className="log-desc desc-text">{log.description || 'No description added'}</p></div>
-              <div className="moto-record-end"><span className="log-hours">{log.hours}</span><div className="moto-record-actions"><button className="btn-ghost" onClick={() => navigate(`/edit-log/${log.id}`)}>EDIT</button><button className="btn-danger" onClick={() => removeLog(log.id)}>REMOVE</button></div></div>
+              <div className="moto-record-end"><span className="log-hours">{log.hours}</span><div className="moto-record-actions"><button className="btn-ghost" onClick={() => navigate(`/edit-log/${log.id}`, { state: { bikeId: pk } })}>EDIT</button><button className="btn-danger" onClick={() => removeLog(log.id)}>REMOVE</button></div></div>
             </article>)}
           </div>
         )}
@@ -87,7 +87,7 @@ const MaintenanceLog = () => {
             {parts.map(part => <article className="log-card" key={part.id}>
               <div className="moto-record-marker"><Icon name="wrench" size={21}/></div>
               <div className="moto-record-details"><span className="moto-record-type">PART REPLACEMENT</span><h3 className="log-date">{part.part_type_display || part.part_type}</h3><p className="moto-record-subdate">{part.date}</p><p className="log-desc desc-text">{part.description || 'No description added'}</p></div>
-              <div className="moto-record-end"><span className="log-hours">{part.hours}</span><div className="moto-record-actions"><button className="btn-ghost" onClick={() => navigate(`/part-edit/${part.id}`)}>EDIT</button><button className="btn-danger" onClick={() => removePart(part.id)}>REMOVE</button></div></div>
+              <div className="moto-record-end"><span className="log-hours">{part.hours}</span><div className="moto-record-actions"><button className="btn-ghost" onClick={() => navigate(`/part-edit/${part.id}`, { state: { bikeId: pk } })}>EDIT</button><button className="btn-danger" onClick={() => removePart(part.id)}>REMOVE</button></div></div>
             </article>)}
           </div>
         )}
@@ -97,6 +97,8 @@ const MaintenanceLog = () => {
 }
 
 const EditLog = () => {
+    const location = useLocation()
+    const [bikeId, setBikeId] = useState(location.state?.bikeId || null)
     const [date, setDate] = useState('')
     const [hours, setHours] = useState('')
     const [description, setDescription] = useState('')
@@ -113,6 +115,7 @@ const EditLog = () => {
 
         const fetchLog = async () => {
             const res = await api.get(`api/bikes/log/detail/${pk}/`)
+            setBikeId(res.data.bike || location.state?.bikeId)
             setDate(res.data.date)
             setHours(res.data.hours)
             setDescription(res.data.description)
@@ -128,7 +131,7 @@ const EditLog = () => {
                 hours,
                 description,
             })
-            navigate(`/logs/${pk}`)
+            navigate(bikeId ? `/logs/${bikeId}` : '/')
         }
         catch(err){
             console.log(err.response.data)
@@ -158,12 +161,14 @@ const EditLog = () => {
                 onChange={(e) => setDescription(e.target.value)}
             />
             <button className="btn-primary" onClick={handleSubmit}>Log</button>
-            <button className="btn-ghost" onClick={() => navigate(`/logs/${pk}`)}>Cancel</button>
+            <button className="btn-ghost" onClick={() => navigate(bikeId ? `/logs/${bikeId}` : '/')}>Cancel</button>
         </div>
     )
 }
 
 const EditPart = () => {
+    const location = useLocation()
+    const [bikeId, setBikeId] = useState(location.state?.bikeId || null)
     const [partType, setPartType] = useState('')
     const [date, setDate] = useState('')
     const [hours, setHours] = useState('')
@@ -181,6 +186,7 @@ const EditPart = () => {
 
         const fetchPart = async () => {
             const res = await api.get(`api/bikes/parts/detail/${pk}/`)
+            setBikeId(res.data.bike || location.state?.bikeId)
             setPartType(res.data.part_type)
             setDate(res.data.date)
             setHours(res.data.hours)
