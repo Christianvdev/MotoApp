@@ -1,378 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
-
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-@media (max-width: 600px) {
-  .dashboard > .btn-primary,
-  .dashboard > .btn-ghost,
-  .dashboard > .btn-oil {
-    width: 100%;
-    display: block;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-}
-
-body {
-  background-color: #05070d;
-  background-image:
-  radial-gradient(ellipse 900px 600px at 88% -10%, rgba(47, 94, 240, 0.16), transparent 60%),
-  radial-gradient(ellipse 700px 500px at -10% 110%, rgba(47, 94, 240, 0.08), transparent 55%),
-  repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 64px),
-  linear-gradient(180deg, #060911 0%, #05070d 40%, #070a16 100%);
-  color: #c9cddb;
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-}
-
-.dashboard {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 56px 28px;
-}
-
-.dashboard br {
-  display: none;
-}
-
-.dashboard > h1 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 2.6rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #ffffff;
-  margin-bottom: 4px;
-  line-height: 1;
-}
-
-.dashboard > h2 {
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #2f5ef0;
-  margin-bottom: 34px;
-  padding-left: 14px;
-  position: relative;
-}
-
-.dashboard > h2::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  background: #2f5ef0;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-/* Bike card */
-.dashboard {
-  counter-reset: bike-index;
-}
-
-.bike-name {
-  width: 100%;
-  max-width: none !important;
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.bike-card {
-  counter-increment: bike-index;
-  background: #0d1120;
-  border: 1px solid #161b2c;
-  border-radius: 4px;
-  padding: 24px 26px;
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.bike-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, #2f5ef0 0%, rgba(47,94,240,0.25) 100%);
-}
-
-.bike-card::after {
-  content: counter(bike-index, decimal-leading-zero);
-  position: absolute;
-  bottom: 2px;
-  right: 12px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 3.6rem;
-  font-weight: 800;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(47,94,240,0.22);
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-}
-
-.bike-card:hover {
-  border-color: #232a48;
-  background: #0f1424;
-}
-
-.bike-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.bike-card h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #ffffff;
-  margin-bottom: 14px;
-  max-width: 80%;
-}
-
-/* Buttons */
-.btn-primary,
-.btn-ghost,
-.btn-danger,
-.btn-oil,
-.btn-log {
-  display: inline-block;
-  padding: 10px 22px;
-  border-radius: 3px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  border: 1px solid transparent;
-}
-
-.btn-primary {
-  background: #2f5ef0;
-  border-color: #2f5ef0;
-  color: #fff;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
-}
-
-.btn-primary:hover {
-  background: #2049d0;
-  border-color: #2049d0;
-}
-
-.btn-ghost {
-  background: transparent;
-  border-color: #1c2136;
-  color: #6b7290;
-}
-
-.btn-ghost:hover {
-  border-color: #3a4266;
-  color: #c9cddb;
-}
-
-.btn-danger {
-  background: transparent;
-  border-color: #7a231f;
-  color: #e0453f;
-}
-
-.btn-danger:hover {
-  background: #7a231f;
-  color: #fff;
-}
-
-.btn-log {
-  background: rgba(47,94,240,0.08);
-  border-color: #2f5ef0;
-  color: #6f93ff;
-}
-
-.btn-log:hover {
-  background: #2f5ef0;
-  color: #fff;
-}
-
-.bike-card .btn-log,
-.bike-card .btn-danger,
-.bike-card .btn-ghost {
-  padding: 6px 14px;
-  font-size: 0.68rem;
-  margin-right: 6px;
-  margin-top: 6px;
-}
-
-.dashboard > .btn-primary,
-.dashboard > .btn-ghost {
-  margin-top: 18px;
-  margin-right: 10px;
-}
-
-/* Form page */
-.form-page {
-  max-width: 440px;
-  margin: 90px auto;
-  padding: 40px 36px;
-  background: #0a0d18;
-  border: 1px solid #161b2c;
-  border-radius: 6px;
-  position: relative;
-}
-
-.form-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 24px;
-  right: 24px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(47,94,240,0.5), transparent);
-}
-
-.form-page h1 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #fff;
-  margin-bottom: 4px;
-  line-height: 1;
-}
-
-.form-page h1::before {
-  display: block;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: #2f5ef0;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.edit-bike h1::before {
-  content: "GARAGE ENTRY — EDIT";
-}
-
-.form-input {
-  width: 100%;
-  display: block;
-  background: #0d1120;
-  border: 1px solid #1c2136;
-  border-radius: 3px;
-  color: #f1f3f9;
-  padding: 12px 16px;
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  outline: none;
-  margin-bottom: 12px;
-  margin-top: 22px;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-
-.form-input:focus {
-  border-color: #2f5ef0;
-  background: #0f1428;
-}
-
-.form-input:hover {
-  border-color: #2a3050;
-}
-
-select.form-input {
-  cursor: pointer;
-}
-
-select.form-input option {
-  background: #0d1120;
-}
-
-.form-page .btn-primary,
-.form-page .btn-ghost {
-  margin-right: 8px;
-  margin-top: 6px;
-}
-
-@media (max-width: 600px) {
-  .dashboard {
-    padding: 40px 18px;
-  }
-
-  .dashboard > h1 {
-    font-size: 2rem;
-  }
-
-  .form-page {
-    margin: 50px auto;
-    padding: 30px 24px;
-  }
-}
-
-.dash-hours {
-  width: fit-content;
-  margin: 0 auto 10px auto;
-
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #6f93ff;
-
-  background: rgba(47, 94, 240, 0.1);
-  padding: 3px 10px;
-  border-radius: 3px;
-}
-.dash-hours::after { content: " HRS";
-  opacity: 0.6;
-  font-size: 0.68rem; 
-}
-.dash-desc {
-  font-size: 0.88rem; color: #8b91a8; line-height: 1.6; max-width: 85%;
-}
-
-.btn-oil {
-  background: #36405e;
-  border-color: #3f4042;
-  color: #fff;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
-  margin-top: 2rem;
-}
-
-.btn-oil:hover {
-  border-color: #0c0c0c;
-}
-.bike-card .bike-hours {
-  width: fit-content;
-  margin: 0 auto 10px;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #6088ff;
-  border: #2f5ff0 4px inset;
-  background: rgba(55, 99, 230, 0.1);
-  padding: 3px 10px;
-  border-radius: 3px;
-}
-
-.bike-hours::after { content: " HRS";
-  opacity: 0.6;
-  font-size: 1.25rem; 
-}
+/* MotoTracker garage: strong racing typography, blue highlights, useful machine info. */
+.dashboard.moto-garage{width:100%;max-width:1320px;margin:0;padding:0}
+.moto-garage-hero{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(230px,.8fr);gap:22px;min-height:305px;overflow:hidden;border:1px solid #24375e;border-radius:15px;background:linear-gradient(120deg,#142752 0%,#0d172b 60%,#0b111f 100%)}
+.moto-garage-hero::before{content:'';position:absolute;top:-90px;left:52%;width:260px;height:500px;transform:rotate(23deg);border-left:1px solid rgba(100,141,255,.13);border-right:1px solid rgba(100,141,255,.13);pointer-events:none}
+.moto-garage-hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:45px clamp(25px,4vw,55px)}
+.moto-garage-hero .moto-heading{margin:16px 0 18px}.moto-hero-period{color:#6891ff}
+.moto-garage-hero .moto-description{max-width:455px;color:#b8c5df}
+.moto-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.moto-hero-art{position:relative;display:flex;align-items:center;justify-content:center;min-height:250px;color:#85a9ff}
+.moto-hero-art>svg{position:relative;z-index:2;filter:drop-shadow(0 0 24px rgba(75,123,255,.35))}
+.moto-hero-art-number{position:absolute;top:6px;right:23px;color:rgba(117,156,255,.11);font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(140px,20vw,280px);font-weight:800;line-height:1}
+.moto-hero-art-line{position:absolute;width:185px;height:185px;border:1px solid #2b4373;border-radius:50%;box-shadow:0 0 0 24px rgba(76,112,206,.035),0 0 0 49px rgba(76,112,206,.025)}
+.moto-hero-art-caption{position:absolute;right:30px;bottom:23px;color:#7d96cb;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.2px}
+.moto-garage-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.moto-garage-summary>div{display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:106px;padding:20px 24px;border:1px solid var(--moto-line);border-radius:12px;background:var(--moto-panel)}
+.moto-garage-summary>div>span{color:var(--moto-dim);font-size:10px;font-weight:750;letter-spacing:1.2px}
+.moto-garage-summary strong{font-family:'Barlow Condensed',sans-serif;color:#fff;font-size:36px;font-weight:800;line-height:1}
+.moto-garage-summary strong small{color:var(--moto-blue);font-size:15px}
+.moto-garage-summary .moto-summary-link{background:#111e3a}
+.moto-summary-link button{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0;border:0;background:none;color:#90afff;font-size:13px;font-weight:750;letter-spacing:.4px;text-align:left}
+.moto-section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:48px 0 19px}
+.moto-section-heading h2{margin-top:9px;font-family:'Barlow Condensed',Impact,sans-serif;color:#fff;font-size:35px;font-weight:800;letter-spacing:.5px}
+.moto-section-heading>span{padding-bottom:4px;color:var(--moto-dim);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px}
+.moto-bike-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.bike-card{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:21px;border:1px solid var(--moto-line);border-radius:13px;background:var(--moto-panel);transition:transform .2s,border-color .2s,background .2s}
+.bike-card:hover{transform:translateY(-3px);border-color:#4766aa;background:#111c30}
+.moto-bike-topline{display:flex;justify-content:space-between;gap:8px;color:#667898;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.5px}
+.moto-bike-active{color:#7195f1;font-size:9px}
+.moto-bike-visual{position:relative;display:grid;place-items:center;height:126px;margin:17px 0 12px;overflow:hidden;border:1px solid #1c3055;border-radius:10px;background:radial-gradient(ellipse at center,#1a3262,#0c1527 70%)}
+.moto-bike-visual>span{position:absolute;top:12px;left:14px;color:rgba(156,182,255,.15);font-family:'Barlow Condensed',sans-serif;font-size:31px;font-weight:800;text-transform:uppercase}
+.moto-bike-visual svg{position:relative;color:#85a9ff;filter:drop-shadow(0 0 14px rgba(57,98,215,.28))}
+.moto-bike-info{margin-bottom:21px}.moto-bike-year{color:var(--moto-blue);font-size:10px;font-weight:750;letter-spacing:1px;text-transform:uppercase}
+.bike-name{margin:7px 0 0;color:#fff;font-family:'Barlow Condensed',Impact,sans-serif;font-size:30px;font-weight:800;line-height:1.1;text-transform:uppercase;overflow-wrap:anywhere}
+.moto-bike-meter{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:15px 0;border-top:1px solid var(--moto-line)}
+.moto-bike-meter>span{color:var(--moto-dim);font-size:10px;font-weight:700;letter-spacing:1px}
+.bike-hours{color:#fff;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:650}.bike-hours small{color:var(--moto-blue);font-size:10px}
+.moto-bike-main-action{display:flex!important;align-items:center;justify-content:space-between;width:100%;margin-top:auto}
+.moto-bike-actions{display:flex;gap:9px;margin-top:10px}.moto-bike-actions button{flex:1}
+.moto-add-bike-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;min-height:310px;padding:24px;border:1px dashed #344a77;border-radius:13px;background:rgba(20,35,65,.35);color:#c2d1fa}
+.moto-add-bike-tile>span{display:grid;place-items:center;width:57px;height:57px;border:1px solid #35538b;border-radius:13px;background:#14264b;color:#90b0ff}
+.moto-add-bike-tile strong{font-family:'Barlow Condensed',sans-serif;font-size:22px;letter-spacing:.7px}
+.moto-add-bike-tile small{color:var(--moto-muted);font-size:11px}
+.moto-add-bike-tile:hover{background:#152443;border-color:#6786cf}
+.moto-garage-empty{display:flex;flex-direction:column;align-items:center;gap:15px;padding:70px 24px;border:1px dashed #344a77;border-radius:14px;background:#0e1728;text-align:center;color:var(--moto-muted)}
+.moto-garage-empty h3{color:white;font-family:'Barlow Condensed',sans-serif;font-size:29px}.moto-garage-empty p{max-width:360px;font-size:12px;line-height:1.7}
+.moto-empty-icon{color:#7fa4ff}
+.btn-primary,.btn-ghost,.btn-danger,.btn-log,.btn-oil{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:40px;padding:11px 16px;border:1px solid transparent;border-radius:8px;font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:750;letter-spacing:.5px;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
+.btn-primary{background:#2f5ef0;border-color:#5279ff;color:#fff}.btn-primary:hover{background:#426fff}
+.btn-ghost{background:#131f35;border-color:#304160;color:#b7c5e3}.btn-ghost:hover{background:#1b2c4b;border-color:#5b7bbf;color:#fff}
+.btn-danger{background:transparent;border-color:#4b303c;color:#e88a9b}.btn-danger:hover{background:#3c1f2c;color:#ffc5ce}
+.btn-log{background:#1b3776;border-color:#3b61c2;color:#e3ebff}.btn-log:hover{background:#2d57ba}
+.btn-oil{background:#162c56;border-color:#4264b0;color:#b6caff}.btn-oil:hover{background:#244580}
+.form-page{width:calc(100% - 32px);max-width:530px;margin:35px auto 70px;padding:34px;border:1px solid var(--moto-line);border-radius:14px;background:var(--moto-panel)}
+.form-page h1{margin-bottom:24px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:39px;font-weight:800;text-transform:uppercase}
+.form-page h1::before{content:'RIDER WORKSHOP / TOOL';display:block;margin-bottom:9px;color:var(--moto-blue);font-family:Inter,sans-serif;font-size:10px;font-weight:750;letter-spacing:2px}
+.form-input{display:block;width:100%;min-height:48px;margin:0 0 13px;padding:12px 15px;border:1px solid #30405f;border-radius:9px;outline:none;background:#0b1220;color:#fff;font-size:16px}
+.form-input:focus{border-color:#6e93ff}.form-input::placeholder{color:#8290aa}
+.form-page .btn-primary,.form-page .btn-ghost{margin:8px 8px 0 0}
+@media(max-width:1200px){.moto-bike-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.moto-garage-hero{grid-template-columns:1fr}.moto-hero-art{display:none}.moto-garage-hero-content{padding:37px 30px}.moto-garage-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.moto-summary-link{grid-column:1/-1}}
+@media(max-width:640px){.moto-garage-hero-content{padding:32px 22px}.moto-garage-summary{gap:9px}.moto-garage-summary>div{padding:17px;min-height:96px}.moto-garage-summary strong{font-size:30px}.moto-bike-grid{grid-template-columns:1fr}.moto-section-heading{margin-top:35px}.moto-section-heading h2{font-size:30px}.moto-section-heading>span{font-size:9px}.form-page{margin:12px auto 55px;padding:25px 19px}}
