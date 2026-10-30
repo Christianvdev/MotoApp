@@ -12,7 +12,7 @@ A full stack motocross bike tracking web application built with Django REST Fram
 - Python / Django
 - Django REST Framework
 - Simple JWT (authentication)
-- PostgreSQL (production) / SQLite (development)
+- SQLite (configured in the checked-in Django settings)
 
 **Frontend**
 - React (Vite)
@@ -42,61 +42,29 @@ A full stack motocross bike tracking web application built with Django REST Fram
 
 ## Project Structure
 
-```
-MotoApp/
-├── MotoTracker/                # Django project root
-│   ├── accounts/                # User registration + auth
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── views.py
-│   │   └── urls.py
-│   │
-│   ├── bikes/                   # Bikes + maintenance logs
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── views.py
-│   │   └── urls.py
-│   │
-│   ├── MotoTracker/             # Django project config
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   │
-│   ├── manage.py
-│   └── requirements.txt
-│
-└── frontend/                    # React app
-    ├── src/
-    │   ├── api/
-    │   │   └── axios.js         # Axios instance + JWT interceptor + refresh logic
-    │   ├── pages/
-    │   │   ├── Login.jsx
-    │   │   ├── Register.jsx
-    │   │   ├── Dashboard.jsx    # Dashboard + EditBike
-    │   │   ├── MaintenanceLog.jsx  # Log list + EditLog
-    │   │   ├── AddBike.jsx
-    │   │   └── AddMaintenance.jsx
-    │   ├── styles/
-    │   └── App.jsx
-    └── .env
-```
-
----
+| Path | Purpose |
+|------|---------|
+| `manage.py` | Django command-line entry point |
+| `requirements.txt` | Backend dependencies |
+| `MotoTracker/` | Django settings and URL configuration |
+| `accounts/` | Registration and account endpoints |
+| `bikes/` | Bike and maintenance models, views, and migrations |
+| `frontend/` | React/Vite frontend |
+| `frontend/api/axios.js` | API client and token refresh |
 
 ## Getting Started
 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/Christiandev/MotoApp.git
+git clone https://github.com/Christianvdev/MotoApp.git
 cd MotoApp
 ```
 
 ### 2. Backend setup
 
 ```bash
-cd MotoTracker
-
+# Run from the repository root (MotoApp/).
 # Create and activate virtual environment
 python -m venv .venv
 source .venv/bin/activate        # Mac/Linux
@@ -106,14 +74,14 @@ source .venv/bin/activate        # Mac/Linux
 pip install -r requirements.txt
 ```
 
-Create a `.env` file in the `MotoTracker/` directory:
+Create a `.env` file in the repository root (`MotoApp/`), alongside `manage.py`:
 
 ```env
 SECRET_KEY=your_django_secret_key
+DEBUG=True
 ```
 
 ```bash
-python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
@@ -121,6 +89,8 @@ python manage.py runserver
 Django runs on `http://localhost:8000`
 
 ### 3. Frontend setup
+
+In a second terminal, start from the repository root (`MotoApp/`).
 
 ```bash
 cd frontend
